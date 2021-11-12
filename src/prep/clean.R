@@ -3,7 +3,7 @@ library(tidyr)
 
 # Steam dataset
 
-steam_ds <- read.csv('steam.csv')
+steam_ds <- read.csv('data/steam.csv')
 
 steam_ds <- steam_ds[!(steam_ds$average_playtime == '0'),]
 
@@ -21,12 +21,12 @@ steam_ds <- within(steam_ds, rm('english', 'developer', 'platforms', 'required_a
 steam_ds <- steam_ds %>% 
   mutate(id = appid )
   
-#game_id <- data.frame(steam_ds$appid)
+game_id <- data.frame(steam_ds$appid)
 
-#write.csv(game_id, file = 'game_id.csv')
+write.csv(game_id, file = 'data/game_id.csv')
 
-metascore <- read.csv('metascore.csv')
-game_url <- read.csv('game_url.csv')
+metascore <- read.csv('data/metascore.csv')
+game_url <- read.csv('data/game_url.csv')
 
 df_merged <- merge(game_url, metascore, by = 'full_url')
 df_merged2 <- merge(df_merged, steam_ds, by = 'id')
@@ -74,6 +74,7 @@ df_merged2$categories <- gsub("Includes Source SDK", "", df_merged2$categories)
 df_merged2$categories <- gsub("Co-op", "", df_merged2$categories)
 df_merged2$categories <- gsub(";", " ", df_merged2$categories)
 df_merged2$categories <- trimws(df_merged2$categories, which = c("both"))
+df_merged2$publisher <- trimws(df_merged2$publisher, which = c("both"))
 
 
 df_merged2$game_mode <- ifelse(df_merged2$categories == "Single-player", 1, 0)
@@ -82,6 +83,24 @@ df_merged2 <- df_merged2 %>% mutate_at(vars(user_rating), funs(round(., 2)))
 
 write.csv(df_merged2, file = "df_merged2.csv")
 
-table(df_merged2$game_mode)
+## publisher dummy
+
+publishers_overview <- as.data.frame(df_merged2$publisher)
+publishers_overview <- rename(publishers_overview, 'publisher' = 'df_merged2$publisher')
+publishers_overview$publisher <- trimws(publishers_overview$publisher, which = c('both'))
+
+publishers_overview <- publishers_overview %>% 
+  group_by(publisher) 
+  
+publishers_overview <- publishers_overview[!duplicated(publishers_overview$publisher),]
+
+write.csv(publishers_overview, file = "data/publishers.csv")
 
 sapply(df_merged2, mode)
+
+df_merged3 <- merge(results, df_merged2, by = "id")
+df_merged3 <- df_merged3[rm(...1)]
+
+summary(lm(owners ~ user_rating + expert_rating + user_rating*game_mode + expert_rating*game_mode, data = df_merged3))
+
+summary(lm(owners ~ expert_rating + user_rating + user_rating*game_mode + expert_rating*game_mode, data = df_merged3))
