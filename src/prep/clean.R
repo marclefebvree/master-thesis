@@ -118,7 +118,7 @@ df_merged2 <- df_merged2 %>%
 
 ## Save df_merged2
 
-write.csv(df_merged2, file = "df_merged2.csv")
+write.csv(df_merged2, file = "data/df_merged2.csv")
 
 # Step 3
 ## Create dataset in order to systematically create dummy variable for publisher
