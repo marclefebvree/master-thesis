@@ -2,9 +2,9 @@
 
 ## Add additional necessary computations of data (not all are used)
 
-clean_test <- df_clean
+clean_test <- read.csv("./gen/preparation/output/df_clean.csv")
 
-clean_test$d_price_free <- ifelse(df_clean$price == 0, 1, 0)
+clean_test$d_price_free <- ifelse(clean_test$price == 0, 1, 0)
 clean_test$d_price_low <- ifelse(clean_test$price >= 0.01& clean_test$price <= 5, 1, 0)
 clean_test$d_price_mid <- ifelse(clean_test$price >= 5.01& clean_test$price <= 10, 1, 0)
 clean_test$d_price_high <- ifelse(clean_test$price > 10.01, 1, 0)
@@ -46,8 +46,8 @@ msummary(list("OLS" = fls_4),
                          "scale_expert:scale_publisher" = "Expert rating x Publisher",
                          "scale_user:scale_publisher" = "User rating x Publisher"),
          gof_omit = c("R2 Within|R2 Pseudo|Log.Lik.|AIC|BIC"),
-         statistic = "{std.error} ({p.value})", stars = TRUE)
-         #output = "gen/analysis/output/regression_table.png")
+         statistic = "{std.error} ({p.value})", stars = TRUE,
+         output = "gen/analysis/output/regression_table.png")
 
 
 
