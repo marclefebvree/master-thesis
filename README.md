@@ -7,4 +7,33 @@ The results show that expert- and user review rating both have a positive effect
 The findings suggest that video game publishers releasing PC games should take both expert- and user review ratings into account, due to their significant effect on sales related outcomes. In addition, managers of major publishers should pay attention to practices that may improve expert ratings. This is due to the fact that effect of expert ratings on sales is strengthened when a game is released by a major publisher. Also, publishers that release multi-player games should lay emphasis on the improvement of user ratings. This is because the effect of user ratings on sales is strengthened when a game is multi-player.
 
 ### GitHub structure
-├── README.md ├──.gitignore ├── doc │ └── thesis_marclefebvre_2040052 ├── data │ ├── d_publishers.csv │ ├── df_merged2.csv │ ├── game_id.csv │ ├── game_url.csv │ ├── metascore.csv │ ├── publishers.csv │ ├── results.csv │ └── steam.csv ├── gen │ ├── analysis │ │ └─ output │ │ └── regression_table.png │ └─── data-preparation │ └─ output │ └── df_clean.csv └── src ├── collect │ ├── SteamDB.ipynb │ └── steamspy.ipynb ├── preparation │ ├── summary_stats.R │ └── clean.R ├── analysis │ └── regression.R └── .DS_Store
+├── README.md 
+├──.gitignore 
+├── doc 
+│   └── thesis_marclefebvre_2040052 
+├── data 
+│   ├── d_publishers.csv 
+│   ├── df_merged2.csv 
+│   ├── game_id.csv 
+│   ├── game_url.csv 
+│   ├── metascore.csv 
+│   ├── publishers.csv 
+│   ├── results.csv 
+│   └── steam.csv 
+├── gen 
+│   ├── analysis 
+│   │   └─ output 
+│   │     └── regression_table.png 
+│   └─── data-preparation 
+│       └─ output 
+│         └── df_clean.csv 
+└── src 
+    ├── collect 
+    │   ├── SteamDB.ipynb 
+    │   └── steamspy.ipynb 
+    ├── preparation 
+    │   ├── summary_stats.R 
+    │   └── clean.R 
+    ├── analysis 
+    │   └── regression.R 
+    └── .DS_Store
